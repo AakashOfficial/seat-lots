@@ -9,7 +9,7 @@ public class Room {
     private final Integer number;
     private final ArrayList<Seat> seats = new ArrayList<Seat>();
 
-    public Room (Integer number, Integer numberOfSeats) {
+    public Room(Integer number, Integer numberOfSeats) {
         this.number = number;
 
         for (Integer i = 1; i <= numberOfSeats; i++) {
@@ -21,15 +21,15 @@ public class Room {
         return number;
     }
 
-    public Seat getSeat(Integer seatNumber) {
+    public Seat getSeatAt(Integer seatNumber) {
         return seats.get(seatNumber);
     }
 
-    public void removeSeat(Integer seatNumber) {
+    public void removeSeatAt(Integer seatNumber) {
         seats.remove(seatNumber.intValue());
     }
 
-    public Integer getCapacity () {
+    public Integer getCapacity() {
         return seats.size();
     }
 
