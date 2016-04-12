@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class Room {
     private final Integer number;
-    private final ArrayList<Seat> seats = new ArrayList();
+    private final ArrayList<Seat> seats = new ArrayList<Seat>();
 
     public Room (Integer number, Integer numberOfSeats) {
         this.number = number;
@@ -31,5 +31,21 @@ public class Room {
 
     public Integer getCapacity () {
         return seats.size();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Room room = (Room) o;
+
+        return number.equals(room.number);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return number.hashCode();
     }
 }
