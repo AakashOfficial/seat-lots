@@ -1,5 +1,8 @@
 package net.devwurm.seatlots.lots;
 
+import net.devwurm.seatlots.location.Room;
+import net.devwurm.seatlots.location.Seat;
+
 /**
  * Class for describing a lot
  */
@@ -7,9 +10,9 @@ public class Lot {
     private final Integer roomNumber;
     private final Integer seatNumber;
 
-    public Lot(Integer roomNumber, Integer seatNumber) {
-        this.roomNumber = roomNumber;
-        this.seatNumber = seatNumber;
+    public Lot(Room room, Seat seat) {
+        roomNumber = room.getNumber();
+        seatNumber = seat.getNumber();
     }
 
     public Integer getRoomNumber() {
