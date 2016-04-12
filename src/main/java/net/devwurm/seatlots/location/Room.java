@@ -1,6 +1,7 @@
 package net.devwurm.seatlots.location;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 /**
  * Class for describing a room with seats
@@ -21,12 +22,18 @@ public class Room {
         return number;
     }
 
-    public Seat getSeatAt(Integer seatNumber) {
-        return seats.get(seatNumber);
+    public Optional<Seat> getSeatAt(Integer seatNumber) {
+        if (seatNumber < seats.size()) {
+            return Optional.of(seats.get(seatNumber));
+        } else {
+            return Optional.empty();
+        }
     }
 
     public void removeSeatAt(Integer seatNumber) {
-        seats.remove(seatNumber.intValue());
+        if (seatNumber < seats.size()) {
+            seats.remove(seatNumber.intValue());
+        }
     }
 
     public Integer getCapacity() {
