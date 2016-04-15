@@ -1,13 +1,22 @@
 package net.devwurm.seatlots.location;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
  * Class for describing a list of rooms
  */
 public class RoomList {
-    private final ArrayList<Room> rooms = new ArrayList<Room>();
+    private final List<Room> rooms;
+
+    public RoomList () {
+        this.rooms = new ArrayList<Room>();
+    };
+
+    public RoomList(List<Room> rooms) {
+        this.rooms = rooms;
+    }
 
     public void addRoom(Room room) {
         if (rooms.indexOf(room) >= 0) {

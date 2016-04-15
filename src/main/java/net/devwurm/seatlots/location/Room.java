@@ -1,6 +1,7 @@
 package net.devwurm.seatlots.location;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Optional;
  */
 public class Room {
     private final Integer number;
-    private final ArrayList<Seat> seats = new ArrayList<Seat>();
+    private final List<Seat> seats = new ArrayList<Seat>();
 
     public Room(Integer number, Integer numberOfSeats) {
         this.number = number;
