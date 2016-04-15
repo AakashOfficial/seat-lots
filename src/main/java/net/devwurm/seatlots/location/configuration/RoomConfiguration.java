@@ -1,5 +1,7 @@
 package net.devwurm.seatlots.location.configuration;
 
+import net.devwurm.seatlots.location.DuplicateRoomException;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;

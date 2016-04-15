@@ -1,18 +1,31 @@
 package net.devwurm.seatlots.location;
 
 /**
- * Exception which gets thrown if two rooms with the same number get inserted into the same RoomList
+ * Exception which can be thrown if a Room is already inside a scope, where all rooms should be unique
  */
-public class DuplicateRoomException extends RuntimeException {
-    Integer collidingRoomNumber;
+public class DuplicateRoomException extends IllegalArgumentException {
+    private Integer room;
 
-    public DuplicateRoomException (String message, Integer collidingRoomNumber) {
+    public DuplicateRoomException(String message, Integer room) {
         super(message);
-
-        this.collidingRoomNumber = collidingRoomNumber;
+        this.room = room;
     }
 
-    public Integer getCollidingRoomNumber() {
-        return collidingRoomNumber;
+    public DuplicateRoomException(String s, Throwable throwable, Integer roomString) {
+        super(s, throwable);
+        this.room = roomString;
+    }
+
+    public DuplicateRoomException(Throwable throwable, Integer roomString) {
+        super(throwable);
+        this.room = roomString;
+    }
+
+    public DuplicateRoomException() {
+        super();
+    }
+
+    public Integer getRoom() {
+        return room;
     }
 }
