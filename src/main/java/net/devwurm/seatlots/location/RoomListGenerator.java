@@ -19,6 +19,6 @@ public class RoomListGenerator {
                 .map(e -> new Room(e.getKey(), e.getValue()))
                 .collect(Collectors.toList());
 
-        return new RoomList(rooms);
+        return new RoomList(configuration.getName(), rooms);
     }
 }

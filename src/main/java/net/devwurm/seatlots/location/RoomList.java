@@ -8,13 +8,16 @@ import java.util.Optional;
  * Class for describing a list of rooms
  */
 public class RoomList {
+    private final String name;
     private final List<Room> rooms;
 
-    public RoomList () {
+    public RoomList (String name) {
+        this.name = name;
         this.rooms = new ArrayList<Room>();
     };
 
-    public RoomList(List<Room> rooms) {
+    public RoomList(String name, List<Room> rooms) {
+        this.name = name;
         this.rooms = rooms;
     }
 
