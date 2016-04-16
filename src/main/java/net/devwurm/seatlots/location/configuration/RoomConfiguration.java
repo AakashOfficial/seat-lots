@@ -1,103 +1,66 @@
 package net.devwurm.seatlots.location.configuration;
 
-import net.devwurm.seatlots.location.DuplicateRoomException;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 /**
- * Class for describing a room configuration
+ * Data class for the configuration of a specific room
  */
 public class RoomConfiguration {
-    private String name;
-    private HashMap<Integer, Integer> configuration = new HashMap<>();
+    private IntegerProperty number;
+    private IntegerProperty capacity;
 
-    public RoomConfiguration(String name) {
-        this.name = name;
+    public RoomConfiguration(IntegerProperty number, IntegerProperty capacity) {
+        this.number = number;
+        this.capacity = capacity;
     }
 
-    public RoomConfiguration(String name, HashMap<Integer, Integer> configuration) {
-        this.configuration = configuration;
-        this.name = name;
+    public RoomConfiguration(Integer number, Integer capacity) {
+        this.number = new SimpleIntegerProperty();
+        this.number.setValue(number);
+
+        this.capacity = new SimpleIntegerProperty();
+        this.capacity.setValue(capacity);
     }
 
-    public void addRoom(Integer room, Integer capacity) {
-        if (!configuration.containsKey(room)) {
-            configuration.put(room, capacity);
-        } else {
-            throw new DuplicateRoomException("Room already included in configuration", room);
-        }
+    public int getNumber() {
+        return number.get();
     }
 
-    public void addRoom(String room, String capacity) {
-        Integer roomInt;
-        Integer capacityInt;
-
-        try {
-            roomInt = Integer.parseInt(room);
-        } catch (NumberFormatException e) {
-            throw new IllegalRoomStringException(e.getMessage(), room);
-        }
-
-        try {
-            capacityInt = Integer.parseInt(capacity);
-        } catch (NumberFormatException e) {
-            throw new IllegalCapacityStringException(e.getMessage(), capacity);
-        }
-
-        addRoom(roomInt, capacityInt);
+    public IntegerProperty numberProperty() {
+        return number;
     }
 
-    public void removeRoom(Integer room) {
-        configuration.remove(room);
+    public void setNumber(Integer number) {
+        this.number.setValue(number);
     }
 
-    public void removeRoom(String room) {
-        Integer roomInt;
-
-        try {
-            roomInt = Integer.parseInt(room);
-        } catch (NumberFormatException e) {
-            throw new IllegalRoomStringException(e.getMessage(), room);
-        }
-
-        removeRoom(roomInt);
+    public int getCapacity() {
+        return capacity.get();
     }
 
-    public void updateRoom(Integer room, Integer newCapacity) {
-        if (configuration.containsKey(room)) {
-            configuration.put(room, newCapacity);
-        } else {
-            throw new RoomNotPresentException("Room not in configuration", room);
-        }
+    public IntegerProperty capacityProperty() {
+        return capacity;
     }
 
-    public void updateRoom(String room, String newCapacity) {
-        Integer roomInt;
-        Integer newCapacityInt;
-
-        try {
-            roomInt = Integer.parseInt(room);
-        } catch (NumberFormatException e) {
-            throw new IllegalRoomStringException(e.getMessage(), room);
-        }
-
-        try {
-            newCapacityInt = Integer.parseInt(newCapacity);
-        } catch (NumberFormatException e) {
-            throw new IllegalCapacityStringException(e.getMessage(), newCapacity);
-        }
-
-        updateRoom(roomInt, newCapacityInt);
+    public void setCapacity(Integer capacity) {
+        this.capacity.setValue(capacity);
     }
 
-    public String getName() {
-        return name;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        RoomConfiguration that = (RoomConfiguration) o;
+
+        if (!number.equals(that.number)) return false;
+        return capacity.equals(that.capacity);
+
     }
 
-    public Set<Map.Entry<Integer, Integer>> getConfiguration() {
-        return configuration.entrySet();
+    @Override
+    public int hashCode() {
+        return number.hashCode();
     }
-
 }
