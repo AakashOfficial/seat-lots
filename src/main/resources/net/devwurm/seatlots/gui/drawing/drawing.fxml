@@ -3,7 +3,8 @@
 
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.Text?>
-<GridPane xmlns:fx="http://javafx.com/fxml" fx:controller="net.devwurm.seatlots.gui.drawing.DrawingController" onKeyPressed="#handleNextDraw">
+
+<GridPane xmlns:fx="http://javafx.com/fxml" fx:id="rootPane" fx:controller="net.devwurm.seatlots.gui.drawing.DrawingController" onKeyPressed="#handleNextDraw">
     <Text fx:id="nameText"  GridPane.rowIndex="0" GridPane.columnIndex="2"/>
 
     <Text text="Verbleibende Plätze: "  GridPane.rowIndex="1" GridPane.columnIndex="0"/>
