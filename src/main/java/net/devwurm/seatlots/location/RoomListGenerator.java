@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class RoomListGenerator {
 
     public RoomList generateRoomList(RoomListConfiguration configuration) {
-        Set<RoomConfiguration> configurationSet = configuration.getConfiguration();
+        List<RoomConfiguration> configurationSet = configuration.getConfiguration();
 
         List<Room> rooms = configurationSet.stream()
                 .map(e -> new Room(e.getNumber(), e.getCapacity()))
