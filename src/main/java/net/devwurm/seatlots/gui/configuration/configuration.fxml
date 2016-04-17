@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+
+<?import javafx.scene.text.Text?>
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="net.devwurm.seatlots.gui.configuration.ConfigurationController">
+    <top>
+        <MenuBar>
+            <menus>
+                <Menu text="Datei">
+                    <items>
+                        <MenuItem text="Speichern"/>
+                        <MenuItem text="Laden"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+    <center>
+        <VBox>
+            <TextField fx:id="nameField" promptText="Name"/>
+
+            <Text text="Räume"/>
+
+            <TableView fx:id="roomsTable" editable="true">
+                <columns>
+                    <TableColumn fx:id="numberColumn" text="Raum"/>
+                    <TableColumn fx:id="capacitiesColumn" text="Plätze"/>
+                </columns>
+            </TableView>
+            <HBox>
+                <VBox>
+                    <TextField  fx:id="newRoomNumber" promptText="Neuer Raum"/>
+                    <TextField fx:id="newRoomCapacity" promptText="Plätze"/>
+                </VBox>
+                <Button text="Raum hinzufügen" onAction="#handleAddRoom"/>
+            </HBox>
+        </VBox>
+    </center>
+    <bottom>
+        <Button/>
+    </bottom>
+</BorderPane>
