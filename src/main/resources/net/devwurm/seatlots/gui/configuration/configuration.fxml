@@ -43,6 +43,7 @@
                     <TextField fx:id="newRoomCapacity" promptText="Plätze"/>
                 </VBox>
                 <Button text="Raum hinzufügen" onAction="#handleAddRoom"/>
+                <Button text="Start" onAction="#handleStart"/>
             </HBox>
         </VBox>
     </center>
