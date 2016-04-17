@@ -1,20 +1,26 @@
 package net.devwurm.seatlots.gui.drawing;
 
-import javafx.event.EventType;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import net.devwurm.seatlots.location.RoomList;
 import net.devwurm.seatlots.lots.Lot;
 import net.devwurm.seatlots.lots.LotDrawer;
 
+import java.net.URL;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 /**
  * Controller for the drawing GUI
  */
-public class DrawingController {
+public class DrawingController implements Initializable {
+    @FXML
+    GridPane rootPane;
+
     @FXML
     private Text nameText;
 
@@ -41,7 +47,7 @@ public class DrawingController {
 
     @FXML
     public void handleNextDraw(KeyEvent e) {
-        if(roomListModel != null && e.getEventType().equals(KeyEvent.KEY_TYPED) && e.getCode().equals(KeyCode.ENTER)) {
+        if(roomListModel != null && e.getCode().equals(KeyCode.ENTER)) {
             Optional<Lot> opLot = (new LotDrawer(roomListModel)).drawLot();
 
             if(opLot.isPresent()) {
@@ -52,5 +58,12 @@ public class DrawingController {
                 drawResultText.setText("Kein Los");
             }
         }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        rootPane.sceneProperty().addListener(((observable, oldValue, newValue) -> {
+            rootPane.requestFocus();
+        }));
     }
 }
