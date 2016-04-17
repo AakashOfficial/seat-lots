@@ -68,4 +68,8 @@ public class RoomList {
                 .map(Room::getCapacity)
                 .reduce(0, Integer::sum);
     }
+
+    public String getName() {
+        return name;
+    }
 }

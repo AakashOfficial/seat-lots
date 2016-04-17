@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.text.Text?>
+<GridPane xmlns:fx="http://javafx.com/fxml" fx:controller="net.devwurm.seatlots.gui.drawing.DrawingController" onKeyPressed="#handleNextDraw">
+    <Text fx:id="nameText"  GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+
+    <Text text="Verbleibende Plätze: "  GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+    <Text fx:id="capacityText"  GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+    <Text fx:id="drawResultText" GridPane.rowIndex="2" GridPane.columnIndex="21" />
+</GridPane>
