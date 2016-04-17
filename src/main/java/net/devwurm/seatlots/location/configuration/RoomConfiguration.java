@@ -54,8 +54,7 @@ public class RoomConfiguration {
 
         RoomConfiguration that = (RoomConfiguration) o;
 
-        if (!number.equals(that.number)) return false;
-        return capacity.equals(that.capacity);
+        return number.equals(that.number);
 
     }
 

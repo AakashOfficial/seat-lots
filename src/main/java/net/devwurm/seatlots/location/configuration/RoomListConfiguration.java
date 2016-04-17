@@ -3,20 +3,16 @@ package net.devwurm.seatlots.location.configuration;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableSet;
+import javafx.collections.ObservableList;
 import net.devwurm.seatlots.location.DuplicateRoomException;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * Class for describing a room list configuration
  */
 public class RoomListConfiguration {
     private StringProperty name;
-    private ObservableSet<RoomConfiguration> configuration = FXCollections.observableSet();
+    private ObservableList<RoomConfiguration> configuration = FXCollections.observableArrayList();
 
     public RoomListConfiguration(String name) {
         this.name = new SimpleStringProperty();
@@ -30,8 +26,20 @@ public class RoomListConfiguration {
     public void addRoom(Integer room, Integer capacity) {
         RoomConfiguration tempRoomConfiguration = new RoomConfiguration(room, capacity);
 
-        if (!configuration.contains(room)) {
+        if (!configuration.contains(tempRoomConfiguration)) {
             configuration.add(tempRoomConfiguration);
+
+            tempRoomConfiguration.numberProperty().addListener((prop, oldValue, newValue) -> {
+                if(newValue.equals(0)) {
+                    configuration.remove(tempRoomConfiguration);
+                }
+            });
+
+            tempRoomConfiguration.capacityProperty().addListener((prop, oldValue, newValue) -> {
+                if(newValue.equals(0)) {
+                    configuration.remove(tempRoomConfiguration);
+                }
+            });
         } else {
             throw new DuplicateRoomException("Room already included in configuration", room);
         }
@@ -56,8 +64,13 @@ public class RoomListConfiguration {
         addRoom(roomInt, capacityInt);
     }
 
-    public void removeRoom(Integer room) {
+    public void removeRoom (RoomConfiguration room) {
         configuration.remove(room);
+    }
+
+    public void removeRoom(Integer room) {
+        RoomConfiguration roomConf = new RoomConfiguration(room, 0);
+        removeRoom(roomConf);
     }
 
     public void removeRoom(String room) {
@@ -110,7 +123,7 @@ public class RoomListConfiguration {
         return name;
     }
 
-    public ObservableSet<RoomConfiguration> getConfiguration() {
+    public ObservableList<RoomConfiguration> getConfiguration() {
         return configuration;
     }
 
