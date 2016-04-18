@@ -1,10 +1,16 @@
 package net.devwurm.seatlots.location.configuration;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import net.devwurm.seatlots.location.DuplicateRoomException;
+
+import java.io.IOException;
 
 
 /**
@@ -127,4 +133,15 @@ public class RoomListConfiguration {
         return configuration;
     }
 
+    public String toJSON() throws JsonProcessingException{
+        ObjectMapper mapper = new ObjectMapper();
+
+        return mapper.writeValueAsString(this);
+    }
+
+    public static RoomListConfiguration fromJSON(String jsonString) throws IOException, JsonMappingException, JsonParseException {
+        ObjectMapper mapper = new ObjectMapper();
+
+        return mapper.readValue(jsonString, RoomListConfiguration.class);
+    }
 }
