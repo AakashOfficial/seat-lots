@@ -94,7 +94,7 @@ public class ConfigurationController implements Initializable {
 
     @FXML
     public void handleStart() {
-        StartDrawingHandler startHandler = new StartDrawingHandler(configurationModel, rootStage);
+        DrawingStarter startHandler = new DrawingStarter(configurationModel, rootStage);
         startHandler.startDrawing();
     }
 

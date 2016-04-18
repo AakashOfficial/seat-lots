@@ -13,16 +13,16 @@ import net.devwurm.seatlots.location.configuration.RoomListConfiguration;
 
 import java.io.IOException;
 
-public class StartDrawingHandler {
+public class DrawingStarter {
     private final RoomListConfiguration configurationModel;
     private final Stage rootStage;
 
-    public StartDrawingHandler(RoomListConfiguration configurationModel) {
+    public DrawingStarter(RoomListConfiguration configurationModel) {
         this.configurationModel = configurationModel;
         rootStage = null;
     }
 
-    public StartDrawingHandler(RoomListConfiguration configurationModel, Stage rootStage) {
+    public DrawingStarter(RoomListConfiguration configurationModel, Stage rootStage) {
         this.configurationModel = configurationModel;
         this.rootStage = rootStage;
     }
