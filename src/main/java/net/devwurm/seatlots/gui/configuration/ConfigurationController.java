@@ -3,23 +3,17 @@ package net.devwurm.seatlots.gui.configuration;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
-import net.devwurm.seatlots.gui.drawing.DrawingController;
-import net.devwurm.seatlots.location.RoomList;
-import net.devwurm.seatlots.location.RoomListGenerator;
 import net.devwurm.seatlots.location.configuration.IllegalCapacityStringException;
 import net.devwurm.seatlots.location.configuration.IllegalRoomStringException;
 import net.devwurm.seatlots.location.configuration.RoomConfiguration;
 import net.devwurm.seatlots.location.configuration.RoomListConfiguration;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -28,6 +22,9 @@ import java.util.ResourceBundle;
  */
 
 public class ConfigurationController implements Initializable {
+    @FXML
+    BorderPane rootPane;
+
     @FXML
     private TextField nameField;
 
@@ -56,6 +53,13 @@ public class ConfigurationController implements Initializable {
         numberColumn.setCellValueFactory(cellData -> cellData.getValue().numberProperty());
         capacitiesColumn.setCellValueFactory(cellData -> cellData.getValue().capacityProperty());
 
+        rootPane.sceneProperty().addListener((observable, oldValue, newValue) -> {
+            rootStage = (Stage) newValue.getWindow();
+            newValue.windowProperty().addListener((observable1, oldValue1, newValue1) -> {
+                rootStage = (Stage) newValue1;
+            });
+        });
+
         setDataFromModel();
     }
 
@@ -78,39 +82,6 @@ public class ConfigurationController implements Initializable {
         }
     }
 
-    @FXML
-    public void handleStart() {
-        RoomListGenerator generator = new RoomListGenerator();
-        RoomList roomList = generator.generateRoomList(configurationModel);
-
-        Stage newStage = new Stage();
-        newStage.setFullScreen(true);
-
-        FXMLLoader loader = new FXMLLoader();
-        Parent root;
-
-        try {
-            root = loader.load(getClass().getClassLoader().getResource("net/devwurm/seatlots/gui/drawing/drawing.fxml").openStream());
-        } catch (IOException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Los-Ansicht konnte nicht gestartet werden!");
-            alert.showAndWait();
-            System.exit(1);
-            return;
-        }
-
-        DrawingController controller = loader.getController();
-        controller.setRoomListModel(roomList);
-
-        Scene scene = new Scene(root);
-
-        newStage.setScene(scene);
-        newStage.show();
-
-        if(rootStage != null) {
-            rootStage.close();
-        }
-    }
-
     public RoomListConfiguration getConfigurationModel() {
         return configurationModel;
     }
@@ -121,8 +92,10 @@ public class ConfigurationController implements Initializable {
         setDataFromModel();
     }
 
-    public void setRootStage(Stage rootStage) {
-        this.rootStage = rootStage;
+    @FXML
+    public void handleStart() {
+        StartDrawingHandler startHandler = new StartDrawingHandler(configurationModel, rootStage);
+        startHandler.startDrawing();
     }
 
     private class InnerColorReseter implements ChangeListener<String> {

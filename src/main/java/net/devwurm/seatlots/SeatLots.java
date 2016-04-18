@@ -28,14 +28,11 @@ public class SeatLots extends Application {
         try {
             root = loader.load(getClass().getClassLoader().getResource("net/devwurm/seatlots/gui/configuration/configuration.fxml").openStream());
         } catch (IOException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Konfigurationsansicht konnte nicht gestartet werden!");
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Konfigurationsansicht konnte nicht geladen werden!");
             alert.showAndWait();
             System.exit(1);
             return;
         }
-
-        ConfigurationController controller = loader.getController();
-        controller.setRootStage(primaryStage);
 
         Scene scene = new Scene(root);
 

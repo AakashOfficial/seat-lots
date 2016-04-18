@@ -12,7 +12,7 @@
 <?import javafx.scene.control.TableColumn?>
 
 <?import javafx.scene.text.Text?>
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="net.devwurm.seatlots.gui.configuration.ConfigurationController">
+<BorderPane fx:id="rootPane" xmlns:fx="http://javafx.com/fxml" fx:controller="net.devwurm.seatlots.gui.configuration.ConfigurationController">
     <top>
         <MenuBar>
             <menus>
