@@ -26,7 +26,6 @@ public class LotDrawer {
             Integer numOfRooms = roomList.getNumberOfRooms();
             Integer roomIndex = generator.nextInt(numOfRooms);
             Optional<Room> optionalRoom = roomList.getRoomAt(roomIndex);
-            roomList.removeRoomAt(roomIndex);
 
             Room room;
             if (optionalRoom.isPresent()) {
@@ -45,6 +44,10 @@ public class LotDrawer {
                 seat = optionalSeat.get();
             } else {
                 throw new IllegalStateException("Searched seat not found in Room although it should be there");
+            }
+
+            if(room.getCapacity().equals(0)) {
+                roomList.removeRoomAt(roomIndex);
             }
 
 

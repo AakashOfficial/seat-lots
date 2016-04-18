@@ -13,8 +13,8 @@ public class RoomList {
 
     public RoomList (String name) {
         this.name = name;
-        this.rooms = new ArrayList<Room>();
-    };
+        this.rooms = new ArrayList<>();
+    }
 
     public RoomList(String name, List<Room> rooms) {
         this.name = name;
@@ -47,7 +47,7 @@ public class RoomList {
 
     public void removeRoomAt(Integer pos) {
         if (pos < rooms.size()) {
-            rooms.remove(pos);
+            rooms.remove(pos.intValue());
         }
     }
 
@@ -55,7 +55,7 @@ public class RoomList {
         Optional<Room> r = getRoomByNumber(roomNumber);
 
         if (r.isPresent()) {
-            rooms.remove(r);
+            rooms.remove(r.get());
         }
     }
 
