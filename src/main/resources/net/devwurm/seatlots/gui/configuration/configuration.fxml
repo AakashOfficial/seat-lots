@@ -12,7 +12,9 @@
 <?import javafx.scene.control.TableColumn?>
 
 <?import javafx.scene.text.Text?>
-<BorderPane fx:id="rootPane" xmlns:fx="http://javafx.com/fxml" fx:controller="net.devwurm.seatlots.gui.configuration.ConfigurationController">
+<BorderPane fx:id="rootPane" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="net.devwurm.seatlots.gui.configuration.ConfigurationController"
+            stylesheets="@/net/devwurm/seatlots/gui/configuration/configuration.css">
     <top>
         <MenuBar>
             <menus>
@@ -26,7 +28,7 @@
         </MenuBar>
     </top>
     <center>
-        <VBox>
+        <VBox styleClass="main-element, content-box">
             <TextField fx:id="nameField" promptText="Name"/>
 
             <Text text="Räume"/>
@@ -37,14 +39,20 @@
                     <TableColumn fx:id="capacitiesColumn" text="Plätze"/>
                 </columns>
             </TableView>
-            <HBox>
-                <VBox>
-                    <TextField  fx:id="newRoomNumber" promptText="Neuer Raum"/>
-                    <TextField fx:id="newRoomCapacity" promptText="Plätze"/>
-                </VBox>
-                <Button text="Raum hinzufügen" onAction="#handleAddRoom"/>
-                <Button text="Start" onAction="#handleStart"/>
-            </HBox>
+            <BorderPane styleClass="form-element">
+                <left>
+                    <HBox styleClass="form-element">
+                        <VBox styleClass="form-element">
+                            <TextField fx:id="newRoomNumber" promptText="Neuer Raum"/>
+                            <TextField fx:id="newRoomCapacity" promptText="Plätze"/>
+                        </VBox>
+                        <Button text="Raum hinzufügen" onAction="#handleAddRoom"/>
+                    </HBox>
+                </left>
+                <right>
+                    <Button text="Start" onAction="#handleStart"/>
+                </right>
+            </BorderPane>
         </VBox>
     </center>
     <bottom>

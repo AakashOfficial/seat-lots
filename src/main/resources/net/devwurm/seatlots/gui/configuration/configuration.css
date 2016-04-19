@@ -1,0 +1,11 @@
+.main-element {
+    -fx-padding: 20px;
+}
+
+.content-box {
+    -fx-spacing: 10px;
+}
+
+.form-element {
+    -fx-spacing: 5px;
+}
