@@ -82,6 +82,19 @@ public class ConfigurationController implements Initializable {
         }
     }
 
+    @FXML
+    public void handleSave() {
+        ConfigurationSaver.saveConfiguration(configurationModel);
+    }
+
+    @FXML
+    public void handleLoad() {
+        ConfigurationLoader.loadConfiguration().ifPresent(configuration -> {
+            configurationModel = configuration;
+            setDataFromModel();
+        });
+    }
+
     public RoomListConfiguration getConfigurationModel() {
         return configurationModel;
     }

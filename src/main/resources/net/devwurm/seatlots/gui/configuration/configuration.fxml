@@ -18,8 +18,8 @@
             <menus>
                 <Menu text="Datei">
                     <items>
-                        <MenuItem text="Speichern"/>
-                        <MenuItem text="Laden"/>
+                        <MenuItem text="Speichern" onAction="#handleSave"/>
+                        <MenuItem text="Laden" onAction="#handleLoad"/>
                     </items>
                 </Menu>
             </menus>
