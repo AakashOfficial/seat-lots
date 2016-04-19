@@ -1,14 +1,27 @@
 package net.devwurm.seatlots.location.configuration;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import net.devwurm.seatlots.json.IntegerPropertyDeserializer;
 
 /**
  * Data class for the configuration of a specific room
  */
 public class RoomConfiguration {
+    @JsonProperty
+    @JsonDeserialize(using = IntegerPropertyDeserializer.class)
     private IntegerProperty number;
+
+    @JsonProperty
+    @JsonDeserialize(using = IntegerPropertyDeserializer.class)
     private IntegerProperty capacity;
+
+    /**
+     * Constructor for Jackson
+     */
+    private RoomConfiguration() {}
 
     public RoomConfiguration(IntegerProperty number, IntegerProperty capacity) {
         this.number = number;
@@ -35,6 +48,11 @@ public class RoomConfiguration {
         this.number.setValue(number);
     }
 
+    @JsonProperty("number")
+    public void setNumber(IntegerProperty number) {
+        this.number = number;
+    }
+
     public int getCapacity() {
         return capacity.get();
     }
@@ -43,8 +61,14 @@ public class RoomConfiguration {
         return capacity;
     }
 
+
     public void setCapacity(Integer capacity) {
         this.capacity.setValue(capacity);
+    }
+
+    @JsonProperty("capacity")
+    public void setCapacity(IntegerProperty capacity) {
+        this.capacity = capacity;
     }
 
     @Override
