@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<GridPane xmlns:fx="http://javafx.com/fxml" fx:id="rootPane" fx:controller="net.devwurm.seatlots.gui.drawing.DrawingController" onKeyPressed="#handleNextDraw">
-    <Text fx:id="nameText"  GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.BorderPane?>
+<BorderPane styleClass="main-element" xmlns:fx="http://javafx.com/fxml" fx:id="rootPane"
+            fx:controller="net.devwurm.seatlots.gui.drawing.DrawingController" onKeyPressed="#handleNextDraw"
+            stylesheets="@/net/devwurm/seatlots/gui/drawing/drawing.css">
+    <top>
+        <VBox styleClass="spaced-area">
+            <HBox styleClass="center-aligned">
+                <Text styleClass="title" fx:id="nameText"/>
+            </HBox>
 
-    <Text text="Verbleibende Plätze: "  GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-    <Text fx:id="capacityText"  GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+            <HBox styleClass="left-aligned">
+                <Text styleClass="capacity" text="Verbleibende Plätze: "/>
+                <Text styleClass="capacity" fx:id="capacityText"/>
+            </HBox>
+        </VBox>
+    </top>
 
-    <Text fx:id="drawResultText" GridPane.rowIndex="2" GridPane.columnIndex="21" />
-</GridPane>
+    <center>
+        <HBox styleClass="center-aligned">
+            <Text styleClass="lot" fx:id="drawResultText"/>
+        </HBox>
+    </center>
+</BorderPane>

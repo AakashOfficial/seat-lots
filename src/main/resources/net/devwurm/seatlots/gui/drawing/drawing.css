@@ -1,0 +1,29 @@
+.main-element {
+    -fx-padding: 60px;
+}
+
+.left-aligned {
+    -fx-alignment: top-left;
+}
+
+.center-aligned {
+    -fx-alignment: center;
+}
+
+.spaced-area {
+    -fx-spacing: 70px;
+}
+
+.title {
+    -fx-font-size: 60px;
+}
+
+.capacity {
+    -fx-font-size: 30px;
+}
+
+.lot {
+    -fx-font-size: 150px;
+    -fx-font-weight: 700;
+}
+
