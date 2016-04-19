@@ -1,24 +1,38 @@
 package net.devwurm.seatlots.location.configuration;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import net.devwurm.seatlots.json.ObservableListDeserializer;
+import net.devwurm.seatlots.json.StringPropertyDeserializer;
 import net.devwurm.seatlots.location.DuplicateRoomException;
 
 import java.io.IOException;
-
 
 /**
  * Class for describing a room list configuration
  */
 public class RoomListConfiguration {
-    private StringProperty name;
+    @JsonProperty
+    @JsonDeserialize(using = ObservableListDeserializer.class)
     private ObservableList<RoomConfiguration> configuration = FXCollections.observableArrayList();
+
+    @JsonProperty
+    @JsonDeserialize(using = StringPropertyDeserializer.class)
+    private StringProperty name;
+
+    /**
+     * Constructor for Jackson
+     */
+    private RoomListConfiguration() {
+    }
 
     public RoomListConfiguration(String name) {
         this.name = new SimpleStringProperty();
@@ -29,6 +43,18 @@ public class RoomListConfiguration {
         this.name = name;
     }
 
+    public static RoomListConfiguration fromJSON(String jsonString) throws IOException, JsonMappingException, JsonParseException {
+        ObjectMapper mapper = new ObjectMapper();
+
+        return mapper.readValue(jsonString, RoomListConfiguration.class);
+    }
+
+    @JsonProperty("configuration")
+    @JsonDeserialize(using = ObservableListDeserializer.class)
+    public void setRoomConfigurations(ObservableList<RoomConfiguration> configuration) {
+        this.configuration = configuration;
+    }
+
     public void addRoom(Integer room, Integer capacity) {
         RoomConfiguration tempRoomConfiguration = new RoomConfiguration(room, capacity);
 
@@ -36,13 +62,13 @@ public class RoomListConfiguration {
             configuration.add(tempRoomConfiguration);
 
             tempRoomConfiguration.numberProperty().addListener((prop, oldValue, newValue) -> {
-                if(newValue.equals(0)) {
+                if (newValue.equals(0)) {
                     configuration.remove(tempRoomConfiguration);
                 }
             });
 
             tempRoomConfiguration.capacityProperty().addListener((prop, oldValue, newValue) -> {
-                if(newValue.equals(0)) {
+                if (newValue.equals(0)) {
                     configuration.remove(tempRoomConfiguration);
                 }
             });
@@ -70,7 +96,7 @@ public class RoomListConfiguration {
         addRoom(roomInt, capacityInt);
     }
 
-    public void removeRoom (RoomConfiguration room) {
+    public void removeRoom(RoomConfiguration room) {
         configuration.remove(room);
     }
 
@@ -133,15 +159,9 @@ public class RoomListConfiguration {
         return configuration;
     }
 
-    public String toJSON() throws JsonProcessingException{
+    public String toJSON() throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
 
         return mapper.writeValueAsString(this);
-    }
-
-    public static RoomListConfiguration fromJSON(String jsonString) throws IOException, JsonMappingException, JsonParseException {
-        ObjectMapper mapper = new ObjectMapper();
-
-        return mapper.readValue(jsonString, RoomListConfiguration.class);
     }
 }
