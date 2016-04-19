@@ -55,7 +55,4 @@
             </BorderPane>
         </VBox>
     </center>
-    <bottom>
-        <Button/>
-    </bottom>
 </BorderPane>
