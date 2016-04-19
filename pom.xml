@@ -25,12 +25,14 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>fully.qualified.MainClass</mainClass>
+                            <mainClass>net.devwurm.seatlots.SeatLots</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
-                        <descriptorRef>${project.artifactId}-${project.version}</descriptorRef>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
+                    <finalName>${project.artifactId}-${project.version}</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
                 </configuration>
             </plugin>
             <plugin>
