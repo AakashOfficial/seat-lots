@@ -14,27 +14,36 @@ import net.devwurm.seatlots.location.configuration.RoomListConfiguration;
 import java.io.IOException;
 
 public class DrawingStarter {
-    private final RoomListConfiguration configurationModel;
+    private RoomList roomListModel;
     private final Stage rootStage;
 
+    public DrawingStarter(RoomList roomListModel) {
+        this.roomListModel = roomListModel;
+        rootStage = new Stage();
+    }
+
+    public DrawingStarter(RoomList roomListModel, Stage rootStage) {
+        this.roomListModel = roomListModel;
+        this.rootStage = rootStage;
+    }
+
     public DrawingStarter(RoomListConfiguration configurationModel) {
-        this.configurationModel = configurationModel;
+        setUpRoomList(configurationModel);
         rootStage = null;
     }
 
     public DrawingStarter(RoomListConfiguration configurationModel, Stage rootStage) {
-        this.configurationModel = configurationModel;
+        setUpRoomList(configurationModel);
         this.rootStage = rootStage;
+    }
+
+    private void setUpRoomList(RoomListConfiguration configuration) {
+        RoomListGenerator generator = new RoomListGenerator();
+        roomListModel = generator.generateRoomList(configuration);
     }
 
     @FXML
     public void startDrawing() {
-        RoomListGenerator generator = new RoomListGenerator();
-        RoomList roomList = generator.generateRoomList(configurationModel);
-
-        Stage newStage = new Stage();
-        newStage.setFullScreen(true);
-
         FXMLLoader loader = new FXMLLoader();
         Parent root;
 
@@ -48,15 +57,12 @@ public class DrawingStarter {
         }
 
         DrawingController controller = loader.getController();
-        controller.setRoomListModel(roomList);
+        controller.setRoomListModel(roomListModel);
 
         Scene scene = new Scene(root);
 
-        newStage.setScene(scene);
-        newStage.show();
-
-        if (rootStage != null) {
-            rootStage.close();
-        }
+        rootStage.setScene(scene);
+        rootStage.setFullScreen(true);
+        rootStage.show();
     }
 }
