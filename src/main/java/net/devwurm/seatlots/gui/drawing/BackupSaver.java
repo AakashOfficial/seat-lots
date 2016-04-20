@@ -18,7 +18,7 @@ public class BackupSaver {
         try {
             modelJSON = roomListModel.toJSON();
         } catch (JsonProcessingException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Fehler beim erzeugen der Konfigurationsdatei");
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Fehler beim erzeugen des Backups");
             alert.showAndWait();
             return;
         }
