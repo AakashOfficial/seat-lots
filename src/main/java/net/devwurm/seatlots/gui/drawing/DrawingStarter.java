@@ -61,6 +61,7 @@ public class DrawingStarter {
 
         Scene scene = new Scene(root);
 
+        rootStage.hide();
         rootStage.setScene(scene);
         rootStage.setFullScreen(true);
         rootStage.show();

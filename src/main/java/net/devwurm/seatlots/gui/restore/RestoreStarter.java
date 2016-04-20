@@ -45,6 +45,7 @@ public class RestoreStarter {
 
         Scene scene = new Scene(root);
 
+        rootStage.hide();
         rootStage.setScene(scene);
         rootStage.setWidth(scene.getWidth());
         rootStage.setHeight(scene.getHeight());
