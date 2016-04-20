@@ -7,8 +7,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import net.devwurm.seatlots.gui.configuration.ConfigurationController;
+import net.devwurm.seatlots.gui.configuration.ConfigurationStarter;
+import net.devwurm.seatlots.gui.drawing.BackupLoader;
+import net.devwurm.seatlots.gui.restore.RestoreStarter;
+import net.devwurm.seatlots.location.RoomList;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Main class
@@ -22,21 +27,14 @@ public class SeatLots extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        FXMLLoader loader = new FXMLLoader();
-        Parent root;
+        List<RoomList> backups = BackupLoader.loadStates();
 
-        try {
-            root = loader.load(getClass().getClassLoader().getResource("net/devwurm/seatlots/gui/configuration/configuration.fxml").openStream());
-        } catch (IOException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Konfigurationsansicht konnte nicht geladen werden!");
-            alert.showAndWait();
-            System.exit(1);
-            return;
+        if (backups.size() > 0) {
+            RestoreStarter starter = new RestoreStarter(backups, primaryStage);
+            starter.startRestore();
+        } else {
+            ConfigurationStarter starter = new ConfigurationStarter(primaryStage);
+            starter.startConfiguration();
         }
-
-        Scene scene = new Scene(root);
-
-        primaryStage.setScene(scene);
-        primaryStage.show();
     }
 }
