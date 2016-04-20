@@ -13,9 +13,7 @@
             stylesheets="@/net/devwurm/seatlots/gui/restore/restore.css">
     <center>
         <VBox styleClass="main-element, content-box">
-            <Text text="Backup wiederherstellen"/>
-
-            <Text text="Backups"/>
+            <Text styleClass="title" text="Backup wiederherstellen"/>
 
             <TableView fx:id="backupsTable" editable="true">
                 <columns>
@@ -23,7 +21,7 @@
                     <TableColumn fx:id="capacityColumn" text="Kapazität"/>
                 </columns>
             </TableView>
-            <HBox>
+            <HBox styleClass="spaced-area">
                 <Button text="Wiederherstellen" onAction="#handleRestore"/>
                 <Button text="Verwerfen" onAction="#handleDiscard"/>
                 <Button text="Schließen" onAction="#handleClose"/>
