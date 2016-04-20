@@ -1,0 +1,7 @@
+.main-element {
+    -fx-padding: 20px;
+}
+
+.content-box {
+    -fx-spacing: 10px;
+}

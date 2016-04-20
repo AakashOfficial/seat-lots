@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+
+<?import javafx.scene.text.Text?>
+<BorderPane fx:id="rootPane" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="net.devwurm.seatlots.gui.restore.RestoreController"
+            stylesheets="@/net/devwurm/seatlots/gui/restore/restore.css">
+    <center>
+        <VBox styleClass="main-element, content-box">
+            <Text text="Backup wiederherstellen"/>
+
+            <Text text="Backups"/>
+
+            <TableView fx:id="backupsTable" editable="true">
+                <columns>
+                    <TableColumn fx:id="nameColumn" text="Name"/>
+                </columns>
+            </TableView>
+            <HBox>
+                <Button text="Wiederherstellen" onAction="#handleRestore"/>
+                <Button text="Verwerfen" onAction="#handleDiscard"/>
+                <Button text="Schließen" onAction="#handleClose"/>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>
