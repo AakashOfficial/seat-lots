@@ -53,6 +53,7 @@ public class RoomListConfiguration {
     @JsonDeserialize(using = ObservableListDeserializer.class)
     public void setRoomConfigurations(ObservableList<RoomConfiguration> configuration) {
         this.configuration = configuration;
+        configuration.stream().forEach(this::setDeletionListeners);
     }
 
     public void addRoom(Integer room, Integer capacity) {
@@ -61,20 +62,24 @@ public class RoomListConfiguration {
         if (!configuration.contains(tempRoomConfiguration)) {
             configuration.add(tempRoomConfiguration);
 
-            tempRoomConfiguration.numberProperty().addListener((prop, oldValue, newValue) -> {
-                if (newValue.equals(0)) {
-                    configuration.remove(tempRoomConfiguration);
-                }
-            });
-
-            tempRoomConfiguration.capacityProperty().addListener((prop, oldValue, newValue) -> {
-                if (newValue.equals(0)) {
-                    configuration.remove(tempRoomConfiguration);
-                }
-            });
+            setDeletionListeners(tempRoomConfiguration);
         } else {
             throw new DuplicateRoomException("Room already included in configuration", room);
         }
+    }
+
+    private void setDeletionListeners(RoomConfiguration roomConfiguration) {
+        roomConfiguration.numberProperty().addListener((prop, oldValue, newValue) -> {
+            if (newValue.equals(0)) {
+                configuration.remove(roomConfiguration);
+            }
+        });
+
+        roomConfiguration.capacityProperty().addListener((prop, oldValue, newValue) -> {
+            if (newValue.equals(0)) {
+                configuration.remove(roomConfiguration);
+            }
+        });
     }
 
     public void addRoom(String room, String capacity) {
