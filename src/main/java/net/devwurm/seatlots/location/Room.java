@@ -1,5 +1,8 @@
 package net.devwurm.seatlots.location;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -8,7 +11,11 @@ import java.util.Optional;
  * Class for describing a room with seats
  */
 public class Room {
+    @JsonProperty
     private final Integer number;
+
+    @JsonProperty
+    @JsonDeserialize(as = ArrayList.class)
     private final List<Seat> seats = new ArrayList<Seat>();
 
     public Room(Integer number, Integer numberOfSeats) {

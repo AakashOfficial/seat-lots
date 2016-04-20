@@ -1,5 +1,14 @@
 package net.devwurm.seatlots.location;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import net.devwurm.seatlots.location.configuration.RoomListConfiguration;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -8,7 +17,11 @@ import java.util.Optional;
  * Class for describing a list of rooms
  */
 public class RoomList {
+    @JsonProperty
     private final String name;
+
+    @JsonProperty
+    @JsonDeserialize(as = ArrayList.class)
     private final List<Room> rooms;
 
     public RoomList (String name) {
@@ -19,6 +32,12 @@ public class RoomList {
     public RoomList(String name, List<Room> rooms) {
         this.name = name;
         this.rooms = rooms;
+    }
+
+    public static RoomList fromJSON(String jsonString) throws IOException, JsonMappingException, JsonParseException {
+        ObjectMapper mapper = new ObjectMapper();
+
+        return mapper.readValue(jsonString, RoomList.class);
     }
 
     public void addRoom(Room room) {
@@ -71,5 +90,11 @@ public class RoomList {
 
     public String getName() {
         return name;
+    }
+
+    public String toJSON() throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+
+        return mapper.writeValueAsString(this);
     }
 }

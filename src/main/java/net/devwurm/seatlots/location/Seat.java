@@ -1,9 +1,12 @@
 package net.devwurm.seatlots.location;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Class for describing a seat
  */
 public class Seat {
+    @JsonProperty
     private final Integer number;
 
     public Seat (Integer number) {
