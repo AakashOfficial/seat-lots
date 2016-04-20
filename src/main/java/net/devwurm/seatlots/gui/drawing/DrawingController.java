@@ -61,6 +61,8 @@ public class DrawingController implements Initializable {
                 drawResultText.setText("Kein Los");
             }
         }
+
+        BackupSaver.saveState(roomListModel);
     }
 
     @Override
