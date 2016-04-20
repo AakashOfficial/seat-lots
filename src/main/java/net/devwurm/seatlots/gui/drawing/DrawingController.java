@@ -60,9 +60,14 @@ public class DrawingController implements Initializable {
             } else {
                 drawResultText.setText("Kein Los");
             }
-        }
 
-        BackupSaver.saveState(roomListModel);
+
+            if(roomListModel.getCapacity() > 0) {
+                BackupSaver.saveState(roomListModel);
+            } else {
+                BackupRemover.removeBackup(roomListModel.getName());
+            }
+        }
     }
 
     @Override
