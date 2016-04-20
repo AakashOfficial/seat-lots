@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonParseException;
 import javafx.scene.control.Alert;
 import net.devwurm.seatlots.SeatLots;
 import net.devwurm.seatlots.location.RoomList;
-import net.devwurm.seatlots.location.configuration.RoomListConfiguration;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,11 +12,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
- * Class from loaing backup State files
+ * Class from loading backup State files
  */
 public class BackupLoader {
     public static List<RoomList> loadStates() {
@@ -32,11 +30,11 @@ public class BackupLoader {
                         try {
                             roomListModel = RoomList.fromJSON(json);
                         } catch (JsonParseException e) {
-                            Alert alert = new Alert(Alert.AlertType.ERROR, "Fehlerhafte Konfigurationsdatei");
+                            Alert alert = new Alert(Alert.AlertType.ERROR, "Fehlerhafte Backupdatei");
                             alert.showAndWait();
                             return Optional.empty();
                         } catch (IOException e) {
-                            Alert alert = new Alert(Alert.AlertType.ERROR, "Fehler beim Verarbeiten der Konfigurationsdatei");
+                            Alert alert = new Alert(Alert.AlertType.ERROR, "Fehler beim Verarbeiten der Backupdatei");
                             alert.showAndWait();
                             return Optional.empty();
                         }
