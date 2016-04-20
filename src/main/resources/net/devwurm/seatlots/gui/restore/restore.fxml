@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
-
 <?import javafx.scene.text.Text?>
-<BorderPane fx:id="rootPane" xmlns:fx="http://javafx.com/fxml"
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:id="rootPane"
             fx:controller="net.devwurm.seatlots.gui.restore.RestoreController"
             stylesheets="@/net/devwurm/seatlots/gui/restore/restore.css">
     <center>
@@ -20,6 +20,7 @@
             <TableView fx:id="backupsTable" editable="true">
                 <columns>
                     <TableColumn fx:id="nameColumn" text="Name"/>
+                    <TableColumn fx:id="capacityColumn" text="Kapazität"/>
                 </columns>
             </TableView>
             <HBox>
