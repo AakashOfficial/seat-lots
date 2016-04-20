@@ -1,12 +1,12 @@
 package net.devwurm.seatlots.location;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import net.devwurm.seatlots.location.configuration.RoomListConfiguration;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,13 +18,19 @@ import java.util.Optional;
  */
 public class RoomList {
     @JsonProperty
-    private final String name;
+    private String name;
 
     @JsonProperty
     @JsonDeserialize(as = ArrayList.class)
-    private final List<Room> rooms;
+    private List<Room> rooms;
 
-    public RoomList (String name) {
+    /**
+     * Jackson constructor
+     */
+    private RoomList() {
+    }
+
+    public RoomList(String name) {
         this.name = name;
         this.rooms = new ArrayList<>();
     }
@@ -78,10 +84,12 @@ public class RoomList {
         }
     }
 
+    @JsonIgnore
     public Integer getNumberOfRooms() {
         return rooms.size();
     }
 
+    @JsonIgnore
     public Integer getCapacity() {
         return rooms.stream()
                 .map(Room::getCapacity)

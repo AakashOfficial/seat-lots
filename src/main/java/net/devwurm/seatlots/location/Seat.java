@@ -7,7 +7,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Seat {
     @JsonProperty
-    private final Integer number;
+    private Integer number;
+
+    /**
+     * Jackson constructor
+     */
+    private Seat() {}
 
     public Seat (Integer number) {
         this.number = number;

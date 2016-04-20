@@ -1,5 +1,6 @@
 package net.devwurm.seatlots.location;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
@@ -12,11 +13,16 @@ import java.util.Optional;
  */
 public class Room {
     @JsonProperty
-    private final Integer number;
+    private Integer number;
 
     @JsonProperty
     @JsonDeserialize(as = ArrayList.class)
-    private final List<Seat> seats = new ArrayList<Seat>();
+    private List<Seat> seats = new ArrayList<Seat>();
+
+    /**
+     * Jackson constructor
+     */
+    private Room() {}
 
     public Room(Integer number, Integer numberOfSeats) {
         this.number = number;
@@ -28,6 +34,12 @@ public class Room {
 
     public Integer getNumber() {
         return number;
+    }
+
+
+    @JsonIgnore
+    public Integer getCapacity() {
+        return seats.size();
     }
 
     public Optional<Seat> getSeatAt(Integer seatNumber) {
@@ -42,10 +54,6 @@ public class Room {
         if (seatNumber < seats.size()) {
             seats.remove(seatNumber.intValue());
         }
-    }
-
-    public Integer getCapacity() {
-        return seats.size();
     }
 
     @Override
