@@ -9,6 +9,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
+import net.devwurm.seatlots.gui.drawing.DrawingStarter;
 import net.devwurm.seatlots.location.configuration.IllegalCapacityStringException;
 import net.devwurm.seatlots.location.configuration.IllegalRoomStringException;
 import net.devwurm.seatlots.location.configuration.RoomConfiguration;

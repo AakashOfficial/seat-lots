@@ -1,4 +1,4 @@
-package net.devwurm.seatlots.gui.configuration;
+package net.devwurm.seatlots.gui.drawing;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

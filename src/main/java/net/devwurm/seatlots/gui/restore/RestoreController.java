@@ -11,7 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import net.devwurm.seatlots.gui.configuration.ConfigurationStarter;
-import net.devwurm.seatlots.gui.configuration.DrawingStarter;
+import net.devwurm.seatlots.gui.drawing.DrawingStarter;
 import net.devwurm.seatlots.gui.drawing.BackupRemover;
 import net.devwurm.seatlots.location.RoomList;
 
