@@ -24,8 +24,13 @@
     </top>
 
     <center>
-        <HBox styleClass="center-aligned">
-            <Text styleClass="lot" fx:id="drawResultText"/>
-        </HBox>
+        <VBox>
+            <HBox styleClass="center-aligned">
+                <Text styleClass="lot" fx:id="drawResultText"/>
+            </HBox>
+            <HBox styleClass="center-aligned">
+                <Text text="Bitte ENTER drücken" styleClass="help"/>
+            </HBox>
+        </VBox>
     </center>
 </BorderPane>

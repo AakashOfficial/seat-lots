@@ -22,6 +22,10 @@
     -fx-font-size: 30px;
 }
 
+.help {
+    -fx-font-size: 45px;
+}
+
 .lot {
     -fx-font-size: 150px;
     -fx-font-weight: 700;
